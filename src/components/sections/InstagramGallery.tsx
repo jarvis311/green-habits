@@ -2,23 +2,35 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import type { GalleryItem } from "@/data/types";
+import { cn } from "@/lib/utils";
 
 export interface InstagramGalleryProps {
   eyebrowPrimary: string;
   eyebrowSecondary?: string;
+  /** Eyebrow color — defaults to the sage tone used elsewhere in the app. */
+  eyebrowTone?: "sage" | "clay";
   title: string;
   items: GalleryItem[];
+  /** Override the default sage outline CTA (e.g. to match an ink-outline treatment). */
+  ctaClassName?: string;
 }
 
-export function InstagramGallery({ eyebrowPrimary, eyebrowSecondary, title, items }: InstagramGalleryProps) {
+export function InstagramGallery({
+  eyebrowPrimary,
+  eyebrowSecondary,
+  eyebrowTone = "sage",
+  title,
+  items,
+  ctaClassName,
+}: InstagramGalleryProps) {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
         <div className="flex flex-col gap-2">
-          <EyebrowLabel primary={eyebrowPrimary} secondary={eyebrowSecondary} />
+          <EyebrowLabel primary={eyebrowPrimary} secondary={eyebrowSecondary} tone={eyebrowTone} />
           <h2 className="font-serif text-h1 text-ink">{title}</h2>
         </div>
-        <Button variant="outline" size="md">
+        <Button variant="outline" size="md" className={cn(ctaClassName)}>
           Follow Our Ritual
         </Button>
       </div>

@@ -4,10 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { categoryRepository, productRepository } from "@/data";
 import { Section } from "@/components/layout/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { EyebrowLabel } from "@/components/ui/EyebrowLabel";
 import { Button } from "@/components/ui/Button";
 import { HeroSplit } from "@/components/sections/HeroSplit";
-import { HeroFullBleed } from "@/components/sections/HeroFullBleed";
 import { PromiseManifesto } from "@/components/sections/PromiseManifesto";
 import { CategoryGrid } from "@/components/sections/CategoryGrid";
 import { ProductCard } from "@/components/cards/ProductCard";
@@ -64,9 +62,10 @@ export default async function HomePage() {
         }
       />
 
-      <Section background="cream">
+      <Section background="sand">
         <PromiseManifesto
           eyebrow="Our Manifesto"
+          eyebrowTone="clay"
           title="We believe healthy food should never feel boring."
           body="At Green Habit, our kitchen is a playground of flavors. We combine the high-nutrient profiles of organic greens with robust Italian heritage grains, zestful Mexican spices, and artisanal chef techniques. Eating consciously isn't a restriction here — it's an exciting daily culinary celebration."
         />
@@ -81,7 +80,7 @@ export default async function HomePage() {
         <CategoryGrid categories={categoriesWithCounts} />
       </Section>
 
-      <Section background="sand">
+      <Section background="cream">
         <SectionHeader
           eyebrowNumber="04"
           title="Signature Rituals"
@@ -94,17 +93,28 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      <HeroFullBleed
-        eyebrowPrimary="A New Standard"
-        title="Vibrant plates. No processed sugars. No compromise on artistic culinary delight."
-        description="Our food is alive. It is naturally sweet, organically rich, and meticulously prepared daily in our open kitchen."
-        image={{
-          id: "editorial-plates",
-          url: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1600&q=80",
-          alt: "Vibrant colorful plates arranged on a dark table",
-        }}
-        height="sm"
-      />
+      <section className="grid w-full grid-cols-1 border-t border-border bg-sand lg:grid-cols-2 lg:items-stretch">
+        <div className="flex flex-col justify-center gap-4 px-4 py-12 md:px-10 md:py-16 lg:py-24 lg:pl-20 lg:pr-16">
+          <span className="text-overline font-bold uppercase text-sage">A New Standard</span>
+          <h2 className="max-w-lg font-serif text-h1 text-ink text-balance [font-size:clamp(1.75rem,4vw+1rem,3rem)]">
+            Vibrant plates. No processed sugars. No compromise on artistic culinary delight.
+          </h2>
+          <p className="max-w-lg text-body text-muted">
+            Our food is alive. It is naturally sweet, organically rich, and meticulously prepared daily in our
+            open kitchen. Enjoy premium burgers on slow-fermented organic brioche buns or colorful handcrafted
+            tacos that honor authentic flavors while fueling your vitality.
+          </p>
+        </div>
+        <div className="relative h-[280px] md:h-[360px] lg:h-auto">
+          <Image
+            src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=1600&q=80"
+            alt="Vibrant colorful plates arranged on a dark table"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+      </section>
 
       <Section background="cream" divider="none">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
@@ -118,17 +128,22 @@ export default async function HomePage() {
             />
           </div>
           <div className="flex flex-col gap-4">
-            <EyebrowLabel primary="06" secondary="The Organic Atelier" />
-            <h2 className="font-serif text-h1 text-ink text-balance">
+            <div className="flex items-baseline gap-4">
+              <span className="text-sage font-semibold text-sm shrink-0">06</span>
+              <h2 className="font-serif italic text-[2rem] md:text-[2.5rem] text-ink text-balance">
+                The Organic Atelier
+              </h2>
+            </div>
+            <p className="text-body-lg text-ink">
               Step into a sanctuary designed for quiet mornings, deep culinary focus, and premium gathering.
-            </h2>
+            </p>
             <p className="text-body text-muted">
               We designed our cafe with natural lime plaster, solid premium white oak, and abundant greenery. We
               believe the environment you eat in is as integral to your wellness as the nutrients on your plate.
             </p>
             <Link
               href="/experience"
-              className="inline-flex w-fit items-center gap-2 font-semibold text-body-sm text-sage focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage rounded-sm"
+              className="inline-flex w-fit items-center gap-2 font-semibold text-body-sm text-clay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage rounded-sm"
             >
               Explore the Space
               <ArrowRight size={16} aria-hidden />
@@ -137,21 +152,26 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      <Section background="cream">
+      <Section background="sand">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-4">
-            <EyebrowLabel primary="07" secondary="Our Slow Living Roots" />
-            <h2 className="font-serif text-h1 text-ink text-balance">
+            <div className="flex items-baseline gap-4">
+              <span className="text-sage font-semibold text-sm shrink-0">07</span>
+              <h2 className="font-serif italic text-[2rem] md:text-[2.5rem] text-ink text-balance">
+                Our Slow Living Roots
+              </h2>
+            </div>
+            <p className="text-body-lg text-ink">
               Founded to build a mindful daily bridge between high-quality nutrition and gourmet taste.
-            </h2>
+            </p>
             <p className="text-body text-muted">
               &ldquo;Green Habit started in our family kitchen. We loved organic nutrition, but we craved the
               indulgent ritual of premium bakeries and authentic street food. We wondered: why can&rsquo;t a single
               space do both?&rdquo;
             </p>
             <div className="flex flex-col">
-              <span className="font-semibold text-body text-ink">Mila &amp; David Chen</span>
-              <span className="text-overline uppercase text-clay">Founders of Green Habit</span>
+              <span className="font-serif italic text-h3 text-ink">Mila &amp; David Chen</span>
+              <span className="text-overline uppercase text-sage">Founders of Green Habit</span>
             </div>
           </div>
           <div className="relative h-[280px] w-full overflow-hidden rounded-md md:h-[380px]">
@@ -166,7 +186,7 @@ export default async function HomePage() {
         </div>
       </Section>
 
-      <Section background="sand">
+      <Section background="cream">
         <SectionHeader
           eyebrowNumber="08"
           title="The Daily Habits"
@@ -175,11 +195,11 @@ export default async function HomePage() {
         <ProductGrid products={bestSellers} columns={4} />
       </Section>
 
-      <Section background="cream">
+      <Section background="sand">
         <SectionHeader eyebrowNumber="09" title="Why Green Habit?" subtitle="Our standard of rigorous quality, crafted with passion to feed your body and mind." />
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           {whyGreenHabit.map((value) => (
-            <ValueCard key={value.id} value={value} />
+            <ValueCard key={value.id} value={value} variant="card" />
           ))}
         </div>
       </Section>
@@ -187,21 +207,22 @@ export default async function HomePage() {
       <Section background="cream">
         <InstagramGallery
           eyebrowPrimary="mind_well_established"
-          eyebrowSecondary="@greenhabit"
-          title="Follow Our Ritual"
+          eyebrowTone="clay"
+          title="@greenhabit"
           items={instagramGallery}
+          ctaClassName="!border-ink !text-ink hover:!bg-ink/5"
         />
       </Section>
 
       <Section background="sand">
         <LocationSection
-          eyebrowPrimary="11"
-          eyebrowSecondary="Visit Our Atelier"
+          eyebrowNumber="11"
           title="Visit Our Atelier"
           description="We would love to welcome you to our quiet organic space. Find us in the city center."
           address={FLAGSHIP_ADDRESS}
           hours={FLAGSHIP_HOURS}
           phone={FLAGSHIP_PHONE}
+          ctaTone="ink"
         />
       </Section>
     </>

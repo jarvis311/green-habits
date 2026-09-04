@@ -4,16 +4,18 @@ export interface EyebrowLabelProps {
   primary: string;
   secondary?: string;
   onDark?: boolean;
+  /** Color of the primary label when not on a dark background. Defaults to sage. */
+  tone?: "sage" | "clay";
   className?: string;
 }
 
-export function EyebrowLabel({ primary, secondary, onDark = false, className }: EyebrowLabelProps) {
+export function EyebrowLabel({ primary, secondary, onDark = false, tone = "sage", className }: EyebrowLabelProps) {
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <span
         className={cn(
           "font-bold text-overline uppercase",
-          onDark ? "text-white" : "text-sage"
+          onDark ? "text-white" : tone === "clay" ? "text-clay" : "text-sage"
         )}
       >
         {primary}

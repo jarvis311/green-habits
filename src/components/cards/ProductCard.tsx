@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Plus } from "lucide-react";
 import type { Product } from "@/data/types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -60,6 +59,13 @@ export function ProductCard({
         </Link>
         <div className="flex flex-1 min-w-0 flex-col justify-between gap-3 p-4 md:p-6">
           <div className="flex flex-col gap-3">
+            {product.badges.length > 0 && (
+              <div className="flex flex-wrap gap-1.5">
+                {product.badges.map((badge) => (
+                  <Badge key={badge.id} label={badge.label} tone={badge.tone} />
+                ))}
+              </div>
+            )}
             <div className="flex items-start justify-between gap-2 text-ink">
               <Link
                 href={href}
@@ -71,23 +77,17 @@ export function ProductCard({
             </div>
             <p className="text-body-sm text-muted line-clamp-2">{product.shortDescription}</p>
           </div>
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex flex-wrap gap-1.5">
-              {product.badges.map((badge) => (
-                <Badge key={badge.id} label={badge.label} tone={badge.tone} />
-              ))}
-            </div>
-            <Button
-              size="md"
-              variant="tertiary"
-              className="bg-ink text-white hover:bg-ink/90 shrink-0"
-              leadingIcon={<Plus size={14} aria-hidden />}
-              onClick={handleAddToOrder}
-              disabled={!product.isAvailable}
-            >
-              Customize
-            </Button>
-          </div>
+          <Button
+            size="md"
+            variant="tertiary"
+            className="!border-none !bg-ink !text-white hover:!bg-ink/90 w-fit"
+            onClick={handleAddToOrder}
+            disabled={!product.isAvailable}
+          >
+            {product.isAvailable
+              ? `Quick Add • ${formatCurrency(product.priceCents, product.currency)}`
+              : "Sold Out"}
+          </Button>
         </div>
       </div>
     );
